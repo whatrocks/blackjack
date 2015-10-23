@@ -8,7 +8,7 @@
 }
 
 .covered {
-  background-color: black;
+  background: black url("../img/card-back.png") no-repeat fixed center;
 }
 
 .hand {

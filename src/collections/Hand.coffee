@@ -6,6 +6,7 @@ class window.Hand extends Backbone.Collection
   hit: ->
     @add(@deck.pop())
     @last()
+    @checkScore()
 
 
   hasAce: -> @reduce (memo, card) ->
@@ -22,4 +23,5 @@ class window.Hand extends Backbone.Collection
     # when there is an ace, it offers you two scores - the original score, and score + 10.
     [@minScore(), @minScore() + 10 * @hasAce()]
 
-
+  checkScore: -> 
+    if Math.min @scores()[0], @scores()[1] > 21 then @trigger 'busted'
