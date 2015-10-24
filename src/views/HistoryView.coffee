@@ -1,5 +1,4 @@
-class window.AppView extends Backbone.View
-  
+class window.HistoryView extends Backbone.View
   template: _.template '
     <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
       <button class="play-again-button">Play Again</button>
@@ -18,13 +17,11 @@ class window.AppView extends Backbone.View
 
 
   initialize: ->
-    @gameView = new GameView(model: @model.get('game'))
     @render()
 
   render: ->
-    @$el.html @gameView.$el
-    # @$el.children().detach()
-    # @$el.html @template()
-    # @$('.player-hand-container').html new HandView(collection: @model.get('game').get('playerHand')).el
-    # @$('.dealer-hand-container').html new HandView(collection: @model.get('game').get('dealerHand')).el
+    @$el.children().detach() 
+    @$el.html @template()
+    @$('.player-hand-container').html new HandView(collection: @model.get('game').get('playerHand')).el
+    @$('.dealer-hand-container').html new HandView(collection: @model.get('game').get('dealerHand')).el
 
