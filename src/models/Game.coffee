@@ -19,12 +19,12 @@ class window.Game extends Backbone.Model
     @set 'playerHand', @get('deck').dealPlayer()
     @set 'dealerHand', @get('deck').dealDealer()
 #player bust   
-    @get('playerHand').on 'busted', -> 
-      console.log('player busted!')
+    @get('playerHand').on 'busted', => 
+      @gameOverAlert("You busted!")
 
 #dealer bust
-    @get('dealerHand').on 'busted', -> 
-      console.log('dealer busted!!')
+    @get('dealerHand').on 'busted', => 
+      @gameOverAlert("Dealer busted. You win!")
 #player stand, run dealer's turn
     @get('playerHand').on 'stand', ->
       @get('dealerHand').reveal();
@@ -33,7 +33,6 @@ class window.Game extends Backbone.Model
 
 #dealer round
     @get('dealerHand').on 'continue', ->
-      console.log 'dealer is continuing'
       @get('dealerHand').hit()
       # @dealerTurn()
     ,@
@@ -42,16 +41,13 @@ class window.Game extends Backbone.Model
       dealerScore = @get('dealerHand').getScore()
       playerScore = @get('playerHand').getScore()
       if playerScore > dealerScore 
-        console.log('you win!')
+        @gameOverAlert("You beat the dealer. Good job, dude.")
       else if playerScore == dealerScore
-        console.log("it's a tie!")
+        @gameOverAlert("It's a tie.")
       else 
-        console.log('you lose!')
+        @gameOverAlert("Ouch! You lose!!")
     ,@
 
-
-
-
-    #dealerBust
-    #playerWin
-    #dealerWin
+  gameOverAlert: (message) =>
+    msg = message + " Play again?"
+    if confirm msg then @playAgain()
