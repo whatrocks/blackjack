@@ -5,7 +5,7 @@ class window.GameView extends Backbone.View
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
   '
-  className: 'game'
+  className: 'game container col-md-6'
   
   events:
     'click .hit-button': -> @model.get('playerHand').hit()
