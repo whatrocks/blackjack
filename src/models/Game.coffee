@@ -1,19 +1,32 @@
 class window.Game extends Backbone.Model
   initialize: ->
     @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
-#player bust check on score change
-    @get('playerHand').on 'busted', -> 
-      # @endGame();
-      # console.log('player busted!!')
-      # @evaluate player score
+    @startGame()
+  
+  dealerTurn: ->
+    # console.log 'executing dealers turn'
+    @get('dealerHand').checkScore();
+    return
 
+
+  playAgain: =>
+    @get('playerHand').reset()
+    @get('dealerHand').reset()
+    @startGame()
+
+  startGame: =>
+    console.log('game start')
+    @set 'playerHand', @get('deck').dealPlayer()
+    @set 'dealerHand', @get('deck').dealDealer()
+#player bust   
+    @get('playerHand').on 'busted', -> 
+      console.log('player busted!')
+
+#dealer bust
+    @get('dealerHand').on 'busted', -> 
+      console.log('dealer busted!!')
 #player stand, run dealer's turn
     @get('playerHand').on 'stand', ->
-      console.log 'player standing, now dealer turn'
-      console.log @get('dealerHand')
-      console.log @get('playerHand')
       @get('dealerHand').reveal();
       @dealerTurn()
     ,@
@@ -21,41 +34,20 @@ class window.Game extends Backbone.Model
 #dealer round
     @get('dealerHand').on 'continue', ->
       console.log 'dealer is continuing'
-      @dealerTurn()
+      @get('dealerHand').hit()
+      # @dealerTurn()
     ,@
-#dealer stand: game over, check scores
-    # @get('dealerHand').on 'stand', ->
-    #   console.log('game ended')
-    # ,@
-#dealer bust
-
-    @get('dealerHand').on 'busted', -> 
-      console.log('dealer busted!!')
-
-  
-  dealerTurn: ->
-    console.log 'executing dealers turn'
-    @get('dealerHand').hit();
-    @get('dealerHand').dealerContinue();
-    return
-
-
-  playAgain: =>
-    @get('playerHand').reset()
-    @get('dealerHand').reset()
-    console.log('playagain')
-    # debugger
-    @set 'playerHand', @get('deck').dealPlayer()
-    @set 'dealerHand', @get('deck').dealDealer()
-
-    # @get('playerHand').on 'stand', ->
-    #   console.log 'player standing, now dealer turn'
-    #   console.log @get('dealerHand')
-    #   console.log @get('playerHand')
-    #   @get('dealerHand').reveal();
-    #   @dealerTurn()
-    # ,@
-    return
+#compare end game
+    @get('dealerHand').on 'compare', ->
+      dealerScore = @get('dealerHand').getScore()
+      playerScore = @get('playerHand').getScore()
+      if playerScore > dealerScore 
+        console.log('you win!')
+      else if playerScore == dealerScore
+        console.log("it's a tie!")
+      else 
+        console.log('you lose!')
+    ,@
 
 
 

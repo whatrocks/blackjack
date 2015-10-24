@@ -30,10 +30,12 @@ class window.Hand extends Backbone.Collection
   checkScore: -> 
     console.log 'check score'
     if @getScore() > 21 then @trigger 'busted'
+    else if @getScore() >= 17 then @trigger 'compare'
+    else @trigger 'continue'
 
-  dealerContinue: ->
-    if @getScore() < 17 then @trigger 'continue'
-    else 
+  # dealerContinue: ->
+  #   if @getScore() < 17 then @trigger 'continue'
+  #   else 
 
   reveal: ->
     console.log("reveal")
