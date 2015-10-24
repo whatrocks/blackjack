@@ -16,11 +16,18 @@ class window.Game extends Backbone.Model
     @startGame()
 
   startGame: =>
+
     @set 'message', 'Welcome!'
     console.log('game start')
     @set 'playerHand', @get('deck').dealPlayer()
     @set 'dealerHand', @get('deck').dealDealer()
 #player bust   
+    @get('playerHand').on 'blackjack', => 
+      @get('dealerHand').reveal()
+      @gameOverAlert("Blackjack!!!")
+      # @dealerTurn()
+
+    @get('playerHand').checkScore()
     @get('playerHand').on 'busted', => 
       @gameOverAlert("You busted!")
 
@@ -29,7 +36,7 @@ class window.Game extends Backbone.Model
       @gameOverAlert("Dealer busted. You win!")
 #player stand, run dealer's turn
     @get('playerHand').on 'stand', ->
-      @get('dealerHand').reveal();
+      @get('dealerHand').reveal()
       @dealerTurn()
     ,@
 
@@ -39,7 +46,7 @@ class window.Game extends Backbone.Model
       # @dealerTurn()
     ,@
 #compare end game
-    @get('dealerHand').on 'compare', ->
+    @get('dealerHand').on 'compare blackjack', ->
       dealerScore = @get('dealerHand').getScore()
       playerScore = @get('playerHand').getScore()
       if playerScore > dealerScore 

@@ -2,7 +2,7 @@ class window.NavView extends Backbone.View
   className: 'nav-view navbar navbar-default'
   initialize: ->
     @render()
-    @model.on 'gameOver', @render, @
+    @model.on 'change', @render, @
 
   render: ->
     msg = @model.get('message')

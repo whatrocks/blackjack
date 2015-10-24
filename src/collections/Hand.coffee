@@ -25,11 +25,15 @@ class window.Hand extends Backbone.Collection
     [@minScore(), @minScore() + 10 * @hasAce()]
 
   getScore: ->
-    Math.min @scores()[0], @scores()[1]
+    score = Math.max @scores()[0], @scores()[1]
+    if score > 21
+      return Math.min @scores()[0], @scores()[1]
+    else return score
 
   checkScore: -> 
     console.log 'check score'
     if @getScore() > 21 then @trigger 'busted'
+    else if @getScore() == 21 then @trigger 'blackjack'
     else if @getScore() >= 17 then @trigger 'compare'
     else @trigger 'continue'
 
