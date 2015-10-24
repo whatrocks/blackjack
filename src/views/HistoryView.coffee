@@ -22,7 +22,6 @@ class window.HistoryView extends Backbone.View
     entry = $('<div class="hist-entry container"></div>')
     entry.append cards
     @$el.prepend entry
-
     # @$el.html(@template())
     # @$el.find('.history-stream').append @model.get('playerHand').map (card) ->
     #   new CardView(model: card).$el

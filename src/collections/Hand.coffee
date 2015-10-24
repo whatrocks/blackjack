@@ -31,6 +31,8 @@ class window.Hand extends Backbone.Collection
     else return score
 
   checkScore: -> 
+    if (@deck.length < 1) then @trigger 'outOfCards'
+
     console.log 'check score'
     if @getScore() > 21 then @trigger 'busted'
     else if @getScore() == 21 then @trigger 'blackjack'

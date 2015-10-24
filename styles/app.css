@@ -1,6 +1,7 @@
 body {
   background: #648880;
-  background: linear-gradient(to right, #8bc34a, #4caf50 85%, #388e3c);  
+  background: linear-gradient(to right, #8bc34a, #4caf50 85%, #388e3c);
+  height: 100%;  
 }
 
 .game {
@@ -24,6 +25,11 @@ body {
 
 div .covered {
   background-image: url("../img/card-back.png")!important;
+}
+
+.history-stream {;
+  overflow: scroll;
+  position: absolute;
 }
 
 .hand {

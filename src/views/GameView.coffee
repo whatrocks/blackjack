@@ -16,6 +16,11 @@ class window.GameView extends Backbone.View
       @render()
 
   initialize: ->
+    @model.on 'gameOver', =>
+      $('.hit-button').attr disabled: 'disabled'
+      $('.stand-button').attr disabled: 'disabled'
+
+
     @render()
 
   render: ->
