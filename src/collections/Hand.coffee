@@ -5,9 +5,8 @@ class window.Hand extends Backbone.Collection
 
   hit: ->
     @add(@deck.pop())
-    @last()
     @checkScore()
-    console.log(@deck.length)
+    @last()
 
   stand: -> @trigger 'stand'
 
