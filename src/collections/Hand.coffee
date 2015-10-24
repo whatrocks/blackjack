@@ -33,3 +33,8 @@ class window.Hand extends Backbone.Collection
 
   dealerContinue: ->
     if @getScore() < 17 then @trigger 'continue'
+    else 
+
+  reveal: ->
+    console.log("reveal")
+    @first().flip()
