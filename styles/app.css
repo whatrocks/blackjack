@@ -1,7 +1,15 @@
+body {
+  background: #648880;
+  background: linear-gradient(to right, #8bc34a, #4caf50 85%, #388e3c);  
+}
 
 .game {
-  background-color: green;
   padding: 40px 0;
+}
+
+.nav-view {
+  padding-left: 10px;
+  padding-bottom: 10px;
 }
 
 .card {

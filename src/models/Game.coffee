@@ -1,6 +1,7 @@
 class window.Game extends Backbone.Model
   initialize: ->
     @set 'deck', deck = new Deck()
+    @set 'message', 'Welcome!'
     @startGame()
   
   dealerTurn: ->
@@ -15,6 +16,7 @@ class window.Game extends Backbone.Model
     @startGame()
 
   startGame: =>
+    @set 'message', 'Welcome!'
     console.log('game start')
     @set 'playerHand', @get('deck').dealPlayer()
     @set 'dealerHand', @get('deck').dealDealer()
@@ -49,6 +51,7 @@ class window.Game extends Backbone.Model
     ,@
 
   gameOverAlert: (message) =>
+    @set 'message', message;
     @trigger 'gameOver'
     msg = message + " Play again?"
-    if confirm msg then @playAgain()
+    # if confirm msg then @playAgain()

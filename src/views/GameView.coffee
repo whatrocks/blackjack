@@ -1,7 +1,7 @@
 class window.GameView extends Backbone.View
   template: _.template '
-    <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
-      <button class="play-again-button">Play Again</button>
+    <button class="hit-button btn btn-default">Hit</button> <button class="stand-button btn btn-default">Stand</button>
+      <button class="play-again-button btn btn-default">Play Again</button>
     <div class="player-hand-container"></div>
     <div class="dealer-hand-container"></div>
   '

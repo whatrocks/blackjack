@@ -1,8 +1,8 @@
 class window.AppView extends Backbone.View
   
   initialize: ->
-    @navView = new NavView();
     @gameView = new GameView(model: @model.get('game'))
+    @navView = new NavView(model: @model.get('game'));
     @historyView = new HistoryView(model: @model.get('game'))
     @render()
 

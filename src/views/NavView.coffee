@@ -1,12 +1,9 @@
 class window.NavView extends Backbone.View
-  
   className: 'nav-view navbar navbar-default'
-
   initialize: ->
     @render()
+    @model.on 'gameOver', @render, @
 
   render: ->
-    # debugger;
-    @$el.children().detach()
-    @$el.html('<span>navView</span>')
-
+    msg = @model.get('message')
+    @$el.html('<div class="message"><h1>' + msg + '</h1></div>')
