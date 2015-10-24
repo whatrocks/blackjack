@@ -49,5 +49,6 @@ class window.Game extends Backbone.Model
     ,@
 
   gameOverAlert: (message) =>
+    @trigger 'gameOver'
     msg = message + " Play again?"
     if confirm msg then @playAgain()

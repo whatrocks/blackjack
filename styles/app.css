@@ -1,6 +1,7 @@
 
 .game {
   background-color: green;
+  padding: 40px 0;
 }
 
 .card {
@@ -19,4 +20,16 @@ div .covered {
 
 .hand {
   overflow: auto;
+}
+
+.hist-entry {
+  margin-bottom: 10px;
+}
+
+.hist-entry .card{
+
+  margin-right: 10px;
+  width: 50px;
+  height: 70px;
+
 }
