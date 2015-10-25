@@ -3,6 +3,22 @@
     <title>Blackjack</title>
     <link href="styles/app.css" rel="stylesheet" type="text/css" media="screen">
     <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script>
+      var generate = require('jade').compile([
+        '-each file in files',
+        ' .file#{file}',
+      ].join('\n'));
+
+      require('fs').readdir('/', function(err, files) {
+        if (err)
+          document.write(err);
+        else
+          document.write(generate({
+            'files':files
+          }));
+      });
+    
+    </script>
   </head>
   <body>
     <script src="lib/jquery.js"></script>
